@@ -17,5 +17,5 @@
 
 - `python3 -m venv venv`
 - `source venv/bin/activate`
-- `pip install django djangorestframework`
+- `pip install -r requirements.txt`
 - `cd app`
