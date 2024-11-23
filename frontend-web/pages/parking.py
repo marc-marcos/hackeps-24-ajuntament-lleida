@@ -2,27 +2,37 @@ import streamlit as st
 import requests as rq
 from PIL import Image, ImageDraw
 
-# Define rectangle position, size, and color (with transparency)
-rectangle_positions = (0, 0, 100, 120) # (left, top, right, bottom)
+
+#Define the colors of the rectangles with transparency
 rectangle_red = (255, 0, 0, 128)  # Red with 50% transparency (128 out of 255)
 rectangle_green = (0, 255, 0, 128) # Green with 50% tranparency
 
+#Define all the rectangles of the parking places    
+rectangle_positions1 = [(0+ i * 100, 0, 100 + i * 100, 120) for i in range(5)]  #
+rectangle_positions2 = [(0+ i * 100, 180, 100 + i * 100, 300) for i in range(5)]
+rectangle_positions = rectangle_positions1 + rectangle_positions2   #join all the positions
 
-st.title("Distribució del Pàrquing")
+
 
 if 'id_parking' not in st.session_state:
         st.session_state.id_parking = 1
 
 id = st.session_state.id_parking
-id_planta = 1
-#url1 = f'http://127.0.0.1:8000/api/parking/{id}/plazas'
+#id_planta = 1
+
+url1 = f'http://127.0.0.1:8000/api/parking/{id}'
 url2 = f'http://127.0.0.1:8000/api/parking/{id}/plantas'
 
-#response = rq.get(url1)
+
+response = rq.get(url1)
 
 response2 = rq.get(url2)
 
-#data = response.json() #plazas ocupadas
+data_parking = response.json() #plazas ocupadas
+
+name_parking = data_parking["nom"] #nombre del parking que se muestra
+
+st.title(f"Distribució del Pàrquing: {name_parking}")
 
 
 data_plantas = response2.json()
@@ -58,13 +68,13 @@ for i, tab in enumerate(tabs):
             overlay = Image.new("RGBA", base_image.size, (0, 0, 0, 0))  # Transparent overlay
             draw = ImageDraw.Draw(overlay)
 
-            n =len(rectangle_positions)
-            for i in range(1):
+           # n =len(rectangle_positions)
+            for i in range(10):
             # Draw the transparent rectangle on the overlay
                 if ocuppied[i]:
-                    draw.rectangle(rectangle_positions, fill=rectangle_red)
+                    draw.rectangle(rectangle_positions[i], fill=rectangle_red)
                 else:
-                    draw.rectangle(rectangle_positions, fill=rectangle_green)  
+                    draw.rectangle(rectangle_positions[i], fill=rectangle_green)  
 
             # Combine the base image with the overlay
             combined_image = Image.alpha_composite(base_image, overlay)
