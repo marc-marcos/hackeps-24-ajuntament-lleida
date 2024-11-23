@@ -16,6 +16,6 @@
 ## Como buildear el backend?
 
 - `python3 -m venv venv`
-- `source venv/bin/activate`
+- linux: `source venv/bin/activate` o windows: `.venv/Scripts/activate`
 - `pip install -r requirements.txt`
 - `cd app`
