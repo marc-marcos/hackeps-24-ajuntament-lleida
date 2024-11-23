@@ -51,7 +51,7 @@ if parquings.status_code == 200:
 
             folium.Marker(
                 location=[parquing['latitude'], parquing['longitude']],
-                popup=f"Parquing: {parquing['nom']}<br>Plazas disponibles: {plazas}",
+                popup=f"{parquing['nom']}<br><br>Places disponibles: {plazas}<br><br>{'Accesible' if parquing['accesible'] else 'No accesible'}"
                 icon=folium.Icon(color=colorPoint)
             ).add_to(folium_map)
 
