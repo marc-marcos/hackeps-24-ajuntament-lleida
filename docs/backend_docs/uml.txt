@@ -1,0 +1,27 @@
+classDiagram
+  class Parking {
+    +int Id
+    +String Nombre
+    +int NumeroDePlantas
+    +float Latitud
+    +float Longitud
+  }
+
+  class Planta {
+    +int Id
+    +int NPlanta
+    +int Numero
+  }
+
+  class Plaza{
+    +int Id
+    +bool Ocupada
+  } 
+
+  class Log_Plaza{
+    +String Nombre
+  }
+
+  Parking "1" -- "1..*" Planta
+  Planta "1" -- "1..*" Plaza
+  Plaza "1" -- "*" Log_Plaza
