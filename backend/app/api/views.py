@@ -1,4 +1,5 @@
 from rest_framework import permissions, viewsets
+from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Parking, Planta, Plaza, PlazaLog
@@ -66,3 +67,31 @@ class PlazaLogViewSet(viewsets.ModelViewSet):
 
     queryset = PlazaLog.objects.all()
     serializer_class = PlazaLogSerializer
+
+
+class ParkingStatusView(APIView):
+    def get(self, request):
+        # Get the 'parking_id' parameter from the query string (if provided)
+        parking_id = request.query_params.get("parking_id", None)
+
+        if parking_id:
+            # Filter by the specific parking
+            total_spots = Plaza.objects.filter(planta__parking=parking_id).count()
+            occupied_spots = Plaza.objects.filter(
+                planta__parking=parking_id, ocupada=True
+            ).count()
+        else:
+            # Calculate for all parkings if no parameter is provided
+            total_spots = Plaza.objects.count()
+            occupied_spots = Plaza.objects.filter(ocupada=True).count()
+
+        free_spots = total_spots - occupied_spots
+
+        # Return the response as JSON
+        return Response(
+            {
+                "total_spots": total_spots,
+                "occupied_spots": occupied_spots,
+                "free_spots": free_spots,
+            }
+        )
