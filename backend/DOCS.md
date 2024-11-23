@@ -8,6 +8,8 @@
 - `GET /api/planta`: Devuelve todas las plantas.
 - `GET /api/plaza`: Devuelve todas las plazas
 - `GET /api/plazalog`: Devuelve todos los plaza logs.
+- `GET /api/parkingstatus`: Devuelve las plazas libres de todos los parkings.
+- `GET /api/parkingstatus/?parking_id=<parking_id>`: Devuelte las plazas libres del parking_id
 
 - `POST /api/parking`: Crea un parking.
 - `POST /api/planta`: Crea una planta.
