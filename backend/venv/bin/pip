@@ -1,4 +1,4 @@
-#!/home/marcm/Desktop/hackeps-24-ajuntament-lleida/backend/venv/bin/python3
+#!/home/paula/Documentos/hackeps-24-ajuntament-lleida/backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

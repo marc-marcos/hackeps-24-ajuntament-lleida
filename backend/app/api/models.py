@@ -7,6 +7,7 @@ class Parking(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     nom = models.CharField(max_length=50)
+    accesible = models.BooleanField()
 
 
 class Planta(models.Model):
