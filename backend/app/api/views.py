@@ -46,7 +46,7 @@ class PlantaViewSet(viewsets.ModelViewSet):
     def plazas(self, request, pk=None):
         planta = self.get_object()
         plazas = Plaza.objects.filter(planta=planta)
-        serializer = PlantaSerializer(plazas, many=True)
+        serializer = PlazaSerializer(plazas, many=True)
         return Response(serializer.data)
 
 
