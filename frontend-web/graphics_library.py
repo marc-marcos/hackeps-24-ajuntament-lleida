@@ -3,10 +3,11 @@ from collections import defaultdict
 import pandas as pd
 from datetime import datetime
 import requests
+from contants import BASE_URL
 
 
 def get_raw_data():
-    request = requests.get("http://127.0.0.1:8000/api/plazalog")
+    request = requests.get(f"http://{BASE_URL}:8000/api/plazalog")
 
     d = request.json()
 
@@ -18,7 +19,7 @@ def get_raw_data():
 
 
 def get_last_data():
-    request = requests.get("http://127.0.0.1:8000/api/plazalog")
+    request = requests.get(f"http://{BASE_URL}:8000/api/plazalog")
 
     d = request.json()
 
@@ -48,8 +49,8 @@ def get_last_data():
 
 
 def get_accumulated_vehicles():
-    req1 = requests.get("http://127.0.0.1:8000/api/parkingstatus")
-    req2 = requests.get("http://127.0.0.1:8000/api/plazalog")
+    req1 = requests.get(f"http://{BASE_URL}:8000/api/parkingstatus")
+    req2 = requests.get(f"http://{BASE_URL}:8000/api/plazalog")
 
     parking_status = req1.json()
     plaza_log = pd.DataFrame(req2.json())

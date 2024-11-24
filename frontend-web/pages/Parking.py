@@ -2,6 +2,7 @@ import streamlit as st
 import requests as rq
 from PIL import Image, ImageDraw
 from streamlit_autorefresh import st_autorefresh
+from contants import BASE_URL
 
 st.set_page_config(
     page_title="Your App Title",
@@ -17,8 +18,8 @@ if "id_parking" not in st.session_state:
 id = st.session_state.id_parking
 
 
-url1 = f"http://127.0.0.1:8000/api/parking/{id}"
-url2 = f"http://127.0.0.1:8000/api/parking/{id}/plantas"
+url1 = f"http://{BASE_URL}:8000/api/parking/{id}"
+url2 = f"http://{BASE_URL}:8000/api/parking/{id}/plantas"
 
 
 def fetch_data1(url):
@@ -74,12 +75,12 @@ tabs = st.tabs(tab_labels)
 
 for i, tab in enumerate(tabs):
     with tab:
-        url3 = f"http://127.0.0.1:8000/api/planta/{id_plantas[i]}/plazas"
+        url3 = f"http://{BASE_URL}:8000/api/planta/{id_plantas[i]}/plazas"
         response3 = rq.get(url3)
         data_plazas = response3.json()
         ocuppied = [item["ocupada"] for item in data_plazas]
 
-        st.subheader(f"Distribució pàrquing")
+        st.subheader("Distribució pàrquing")
 
         image_url = "../docs/parking-layout.png"
 
@@ -121,4 +122,3 @@ for i, tab in enumerate(tabs):
 # st.write(ocuppied)
 
 # st.write(data)
-

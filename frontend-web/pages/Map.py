@@ -4,9 +4,10 @@ import numpy as np
 import requests as req
 import folium
 from streamlit_folium import st_folium
+from contants import BASE_URL
 # from streamlit_autorefresh import st_autorefresh
 
-url = "http://127.0.0.1:8000/api/parking"
+url = f"http://{BASE_URL}:8000/api/parking"
 
 st.set_page_config(
     page_title="Your App Title",
@@ -45,7 +46,7 @@ if parquings.status_code == 200:
     for parquing in parquings:
         id = parquing["id"]
         st.session_state.pk_clicked = "None"
-        url = f"http://127.0.0.1:8000/api/parking/{id}/plazas"
+        url = f"http://{BASE_URL}:8000/api/parking/{id}/plazas"
         response = req.get(url)
 
         if response.status_code == 200:
