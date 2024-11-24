@@ -62,7 +62,7 @@ if parquings.status_code == 200:
 
             folium.Marker(
                 location=[parquing["latitude"], parquing["longitude"]],
-                popup=f"{parquing['nom']}<br><br>Places disponibles: {plazas}<br><br>{'Accesible' if parquing['accesible'] else 'No accesible'}<br><br>Ves-hi: <a href='https://www.google.com/maps/dir/{parquing['latitude']},{parquing['longitude']}'>Google Maps</a>",
+                popup=f"{parquing['nom']}<br><br>Places disponibles: {plazas}<br><br>{'Accesible' if parquing['accesible'] else 'No accesible'}<br><br>Ves-hi: <a href='https://www.google.com/maps/dir//{parquing['latitude']},{parquing['longitude']}'>Google Maps</a>",
                 icon=folium.Icon(color=colorPoint),
             ).add_to(folium_map)
         else:
