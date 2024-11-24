@@ -3,6 +3,14 @@ from graphics_library import get_last_data, get_accumulated_vehicles, get_raw_da
 import altair as alt
 import pandas as pd
 
+st.set_page_config(
+    page_title="Your App Title",
+    page_icon="logo.png",  # Emoji or small image path
+    layout="wide",
+)
+
+st.sidebar.image("logo.png", use_container_width=True)
+
 d = get_last_data()
 
 st.header("Graphics and Statistics")

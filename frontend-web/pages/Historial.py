@@ -4,6 +4,14 @@ import pandas as pd
 import numpy as np
 from graphics_library import get_raw_data
 
+st.set_page_config(
+    page_title="Your App Title",
+    page_icon="logo.png",  # Emoji or small image path
+    layout="wide",
+)
+
+st.sidebar.image("logo.png", use_container_width=True)
+
 st.title("Historial de vehicles")
 
 if "id_parking" not in st.session_state:
