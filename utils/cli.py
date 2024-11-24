@@ -84,6 +84,8 @@ def flip_placa(id_placa):
     else:
         print(f"Request failed with status code {request.status_code}: {request.text}")
 
+    return nou_estat
+
 
 def update_placa(id_placa, nou_estat):
     data = {"ocupada": nou_estat}
@@ -121,11 +123,12 @@ def generate_fake_data(timestamp):
 
     planta = get_planta_by_plaza(plaza_id)
 
-    flip_placa(plaza_id)
+    is_entrada = flip_placa(plaza_id)
 
     return {
         "datahora": timestamp.strftime("%Y-%m-%dT%H:%M:%S"),
         "plaza": plaza_id,
+        "is_entrada": is_entrada,
     }
 
 
