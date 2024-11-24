@@ -26,3 +26,4 @@ class PlazaLog(models.Model):
     id = models.AutoField(primary_key=True)
     datahora = models.DateTimeField()
     plaza = models.ForeignKey(Plaza, on_delete=models.CASCADE)
+    is_entrada = models.BooleanField()
