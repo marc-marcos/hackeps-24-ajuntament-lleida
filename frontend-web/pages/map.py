@@ -21,9 +21,10 @@ parquings = req.get(url)
 
 #valor per default null
 data = pd.DataFrame(columns=['latitude', 'longitude', 'name', 'size'])
+
 st.title("Localitza un pàrquing")
 
-if 'id_parking' not in st.session_state:
+if "id_parking" not in st.session_state:
     st.session_state.id_parking = 1
 
 if parquings.status_code == 200:
