@@ -6,6 +6,8 @@
 Cada punt al mapa representa una ubicació d'un pàrquing, si està en vermell vol dir que no té cap plaça lliure i verd, en cas contrari. Tot això é spossiible gràcies a un sensor programat en una RaspberryPi. En seleccionar un pàrquing es pot visualitzar informació rellevant sobre el pàrquing, incloent el nom del pàrquing, nombre de places lliures i si té places per a discapacitats. Si, s'ha seleccionat un pàrquing, en una altra pestanya es pot visualitzar la distribució de les places llliures d'aquell pàrquing seleccionat per plantes que estan pintades de verd i vermelles si estan ocupades; addicionalment té un símbol de discapacitat si està reservat per a ells, per tal de que ràpidament es pugui observar la disponibilitat.
 
 ## Documentació 
+__Els fitxers que s'esmenten en aquest readme es troben en la carpeta base de hackeps...__
+
 Abans de possar-nos a programar, hem volgut organitzar-nos bè. Hem dissenyat tant a nivell back com a nivell front dissenys del que ha acabat sent la nostra propera pàgina.
 
 Pel que fa al backend, s'ha fet un UML amb mermaid per organitzar la base de dades i garantir claretat i portabilitat.
@@ -34,4 +36,3 @@ Hem tingut cura a l'hora de nombrar les nostres variables per tenir un codi clar
 
 ## Saber-ne més
 [Ves al devpost](https://devpost.com/software/aparcaxmi?ref_content=user-portfolio&ref_feature=in_progress)
-
