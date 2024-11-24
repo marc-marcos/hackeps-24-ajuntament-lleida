@@ -1,6 +1,7 @@
 import streamlit as st
 import requests as rq
 from PIL import Image, ImageDraw
+from streamlit_autorefresh import st_autorefresh
 
 if 'id_parking' not in st.session_state:
         st.session_state.id_parking = 5
@@ -27,8 +28,8 @@ rectangle_positions1 = [(0+ i * 100, 0, 100 + i * 100, 120) for i in range(5)]  
 rectangle_positions2 = [(0+ i * 100, 180, 100 + i * 100, 300) for i in range(5)]
 rectangle_positions = rectangle_positions1 + rectangle_positions2   #join all the positions
 
-
-
+#st_autorefresh = st.experimental_autorefresh(interval=5000)
+st_autorefresh(interval=5000)
 
 #response = rq.get(url1)
 
@@ -90,7 +91,7 @@ for i, tab in enumerate(tabs):
             draw = ImageDraw.Draw(overlay)
 
         # n =len(rectangle_positions)
-            for i in range(10):
+            for i in range(min(10, len(ocuppied), len(rectangle_positions))):
             # Draw the transparent rectangle on the overlay
                 if ocuppied[i]:
                     draw.rectangle(rectangle_positions[i], fill=rectangle_red)
