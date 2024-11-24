@@ -63,6 +63,63 @@ def create_init():
         )
 
 
+def create_parking_and_planta(nombre, latitude, longitude, accesible):
+    # URL for the POST request
+    url = f"{BASE_URL}parking/"  # Replace with your actual endpoint
+
+    # Data to send in the POST request
+    data = {
+        "latitude": latitude,
+        "longitude": longitude,
+        "nom": nombre,
+        "accesible": accesible,
+    }
+
+    # Headers (optional, but typical for JSON data)
+    headers = {"Content-Type": "application/json"}
+
+    # Make the POST request
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    # Check the response
+    if response.status_code == 200 or response.status_code == 201:
+        print(f"Request was successful {response.json()["id"]}")
+
+        id = response.json()["id"]
+
+        # Crear una planta
+
+        data = {"nom": "Planta 1", "parking": id}
+
+        response = requests.post(
+            f"{BASE_URL}planta/", headers=headers, data=json.dumps(data)
+        )
+
+        if response.status_code == 200 or response.status_code == 201:
+            print(f"Request was successful {response.json()["id"]}")
+            id_planta = response.json()["id"]
+            # Crear diez plazas
+            for i in range(10):
+                ocupada = random.choice([True, False])
+
+                data = {"ocupada": ocupada, "planta": id_planta}
+                response = requests.post(
+                    f"{BASE_URL}plaza/", headers=headers, data=json.dumps(data)
+                )
+                if response.status_code == 200 or response.status_code == 201:
+                    print(f"Request was successful {response.json()["id"]}")
+
+                else:
+                    print(
+                        f"Request failed with status code {response.status_code}: {response.text}"
+                    )
+
+    else:
+        print(
+            f"Request failed with status code {response.status_code}: {response.text}"
+        )
+
+
 def flip_placa(id_placa):
     request = requests.get(f"{BASE_URL}plaza/{id_placa}/")
 
@@ -158,13 +215,12 @@ def fake_logs_for_day(date, min_interval_seconds=30, max_interval_seconds=300):
 
 
 if __name__ == "__main__":
-    create_init()
-
     while True:
         print("Que vols fer? [Nomès una opció a la vegada]")
         print("1. Inicialitzar base de dades amb dummy data.")
         print("2. Flip plaça.")
         print("3. Generar dummy data.")
+        print("4. Crear parking con init.")
         print("9. Exit.")
 
         a = input(">> ")
@@ -181,5 +237,14 @@ if __name__ == "__main__":
             fake_logs_for_day(
                 fake_date, min_interval_seconds=10, max_interval_seconds=600
             )  # Random interval: 10s to 10min
+        elif int(a) == 4:
+            nom = input("Nom del parking: ")
+            longitude = input("Longitude: ")
+            latitude = input("Latitude: ")
+            accesible = input("Accesible? [True/False]: ")
+
+            create_parking_and_planta(
+                nom, int(longitude), int(latitude), bool(accesible)
+            )
         elif int(a) == 9:
             break
